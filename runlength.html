@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--ここからtwitter card-->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:domain" content="nkhr.web.fc2.com">
+    <meta name="twitter:site" content="@tt_cocoan">
+    <meta name="twitter:title" content="ランレングス圧縮タイピング">
+    <meta name="twitter:description" content="">
+    <!--ここまでtwitter card-->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <title>ランレングス圧縮タイピング</title>
+</head>
+
+<body>
+
+    <section class="hero d">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title is-2 has-text-centered" style="color:white;opacity:0.9">
+                    ランレングス圧縮タイピング
+                </h1>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="section">
+
+        <div class="tile is-ancestor">
+
+            <div class="tile is-parent container">
+
+                
+
+                <div id="area" class="is-relative mx-auto">
+
+                    <div class="tile is-parent is-horizontal">
+
+                        <div class="tile is-child has-text-right">
+                            <span id="char" class="title" style="background-color: lemonchiffon;"></span>
+                        </div>
+                        <div class="tile is-child has-text-centered">
+                            <button id="reverse" class="button"></button>
+                        </div>
+                        <div class="tile is-child has-text-left">
+                            <span id="num" class="title" style="background-color: lemonchiffon;"></span>
+                        </div>
+                    </div>
+
+                    <div class="box column is-8 is-offset-2 has-text-centered">
+                        <input id="wordbox" class="input is-large" style="width:30em;">
+                    </div>
+
+
+
+                    <div class="box column is-8 is-offset-2 has-text-centered">
+                        <span id="timer" style="font-size:2em" class="has-text-danger"></span>s<br>
+                        <span id="countTypes" style="font-size:1.5em"></span>/<span id="allTypes">???</span>keys
+                        <span id="kpm" style="font-size:1.5em"></span>kpm<br>
+                        <span id="countChars" style="font-size:1.5em"></span>/400chars
+
+                        <span id="cpm" style="font-size:1.5em"></span>cpm
+                    </div>
+                    <a href="https://ja.wikipedia.org/wiki/%E9%80%A3%E9%95%B7%E5%9C%A7%E7%B8%AE">ランレングス圧縮(Wikipedia)</a>
+                    <p>Space, Enter, Esc どれかを押すと始まります。</p>
+                    <p>文字、数字、文字...の順で押していきます。</p>
+                    <p class="subtitle">例: aabbbc ⇒ a2b3c1 / a1a1b1b1b1c1 etc...</p>
+                    <br>
+                    <p>※同じ文字は最大9連続です。</p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer class="footer py-6">
+    </footer>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.topology.min.js"></script>
+    <script>
+        VANTA.TOPOLOGY({
+            el: ".hero .hero-body",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 150.00,
+            minWidth: 200.00,
+            scale: 3.00,
+            scaleMobile: 1.00,
+            color: 0x45d459,
+            backgroundColor: 0x22222
+          })
+    </script>
+
+    <script src="main.js"></script>
+
+
+</body>
+
+</html>
