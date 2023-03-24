@@ -10,8 +10,25 @@ let cpm = document.getElementById('cpm');
 let char = document.getElementById('char');
 let num = document.getElementById('num');
 let wordBox = document.getElementById('wordbox');
-
 let time = 0;
+
+let isChrNum = true;
+
+const L = 400;
+
+const reverseButton = document.getElementById('reverse');
+reverseButton.addEventListener('click', () => {
+    
+    char = document.getElementById('num');
+    num = document.getElementById('char');
+
+    reverseButton.textContent === 'num⇔chr' 
+    ? reverseButton.textContent = 'chr⇔num'
+    : reverseButton.textContent = 'num⇔chr';
+
+    isChrNum ? isChrNum = false : isChrNum = true;
+
+});
 
 window.addEventListener('keydown', startType);
 
@@ -38,7 +55,7 @@ function makeWord() {
     r = 0;
     let cnt = 0
     let tmp = '';
-    while (word.length < 400) {
+    while (word.length < L) {
         c = Math.floor(Math.random() * 26);
         r = Math.floor(Math.random() * 9) + 1;
         if (tmp !== alphabets[c]) {
@@ -76,33 +93,66 @@ function judgeKeys(e) {
     let c = char.textContent;
     let n = num.textContent;
 
-    if (alphabets.indexOf(e.key) !== -1) {
-        char.textContent = e.key;
-        num.textContent = '';
-    } else if (numbers.indexOf(e.key) !== -1) {
-        correctType(c, e.key);
-        char.textContent = '';
-        num.textContent = e.key;
+    if (isChrNum) {
+
+        if (alphabets.includes(e.key)) {
+            char.textContent = e.key;
+            num.textContent = '';
+        } else if (numbers.includes(e.key)) {
+            correctType(c, e.key);
+            char.textContent = '';
+            num.textContent = e.key;
+        }
+
+    } else {
+
+        if (numbers.includes(e.key)) {
+            char.textContent = '';
+            num.textContent = e.key;
+        } else if (alphabets.includes(e.key)) {
+            correctType(e.key, n);
+            char.textContent = e.key;
+            num.textContent = '';
+        }
+
     }
 
-/*
-    if (e.key === word.at(0)) {
-        correctType();
-    }
 
-*/
 }
 
 function correctType(ch, nu) {
-    console.log(ch, nu);
+
     if (word.slice(0,nu) === ch.repeat(nu)) {
         word = word.slice(nu);
         wordBox.value = word;
 
-        countChars.textContent = Number(countChars.textContent) + Number(nu);
+        countTypes.textContent = Number(countTypes.textContent) + 2;
+        kpm.textContent = (countTypes.textContent / time * 60).toFixed(0);
 
+        countChars.textContent = Number(countChars.textContent) + Number(nu);
         cpm.textContent = (countChars.textContent / time * 60).toFixed(0);
 
+        if (word.length === 0) finishType();
 
     }
 }
+
+function finishType() {
+    stopInterval();
+    makeTweet();
+}
+
+function makeTweet () {
+
+    const tweetButton = document.getElementById('tweet');
+    
+    const t = timer.textContent;
+    const c = cpm.textContent;
+    const k = kpm.textContent;
+    const hashTags = "ランレングス圧縮タイピング"
+    const tweet = `400chars in ${t}sec! (${k}KPM/${c}CPM)`;
+    const url = 'https://nkhr.web.fc2.com/typing/runlength.html';
+    const tweetText = `https://twitter.com/intent/tweet?ref_src=twsrc&text=${tweet}&hashtags=${hashTags}&url=${url}`;
+    tweetButton.href = tweetText;
+}
+
