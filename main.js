@@ -151,9 +151,9 @@ function makeTweet () {
     const k = kpm.textContent;
     const ct = countTypes.textContent;
     const a = document.getElementById('allTypes').textContent;
-    
+
     const hashTags = "ランレングス圧縮タイピング"
-    const tweet = `400chars in ${t}sec! () ${c}CPM,${k}KPM`;
+    const tweet = `${t}sec (${ct}/${a}keys) ${c}CPM,${k}KPM`;
     const url = 'https://nkhr.web.fc2.com/typing/runlength.html';
     const tweetText = `https://twitter.com/intent/tweet?ref_src=twsrc&text=${tweet}&hashtags=${hashTags}&url=${url}`;
     tweetButton.href = tweetText;
