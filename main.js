@@ -40,6 +40,9 @@ function startType(e) {
         countTypes.textContent = "0";
         kpm.textContent = "0";
         cpm.textContent = "0";
+        char.textContent = "";
+        num.textContent = "";
+        
         time = 0;
 
         makeWord();
