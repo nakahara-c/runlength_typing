@@ -9,6 +9,7 @@ let kpm = document.getElementById('kpm');
 let cpm = document.getElementById('cpm');
 let char = document.getElementById('char');
 let num = document.getElementById('num');
+let progress = document.getElementById('progress');
 let wordBox = document.getElementById('wordbox');
 let time = 0;
 
@@ -134,6 +135,8 @@ function correctType(ch, nu) {
 
         countChars.textContent = Number(countChars.textContent) + Number(nu);
         cpm.textContent = (countChars.textContent / time * 60).toFixed(0);
+
+        progress.value = countChars.textContent;
 
         if (word.length === 0) finishType();
 
