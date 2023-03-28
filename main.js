@@ -43,6 +43,7 @@ function startType(e) {
         cpm.textContent = "0";
         char.textContent = "";
         num.textContent = "";
+        progress.value = 0;
         
         time = 0;
 
@@ -163,5 +164,15 @@ function makeTweet () {
     const url = 'https://nkhr.web.fc2.com/typing/runlength.html';
     const tweetText = `https://twitter.com/intent/tweet?ref_src=twsrc&text=${tweet}&hashtags=${hashTags}&url=${url}`;
     tweetButton.href = tweetText;
+
+    addHistory(tweet, tweetText);
 }
 
+function addHistory (tweet, tweetURL) {
+    const newResult = document.createElement('div');
+    newResult.style.margin = '1em';
+    newResult.innerHTML = `${tweet}&nbsp;<a target="_blank" href="${tweetURL}">ツイート</a>`;
+
+    const info = document.getElementById('info');
+    info.appendChild(newResult);
+}
