@@ -1,3 +1,5 @@
+'use strict';
+
 const alphabets = 'abcdefghijklmnopqrstuvwxyz'.split('');
 const numbers = '123456789'.split('');
 let word = ''; let c = 0; let r = 0;
@@ -20,9 +22,6 @@ const L = 400;
 const reverseButton = document.getElementById('reverse');
 reverseButton.addEventListener('click', () => {
     
-    char = document.getElementById('num');
-    num = document.getElementById('char');
-
     reverseButton.textContent === 'num⇔chr' 
     ? reverseButton.textContent = 'chr⇔num'
     : reverseButton.textContent = 'num⇔chr';
@@ -49,6 +48,7 @@ function startType(e) {
 
         makeWord();
         stopInterval();
+        removeJudgeKeysListener();
         timerArray.push(setInterval(startTimer, 100));
         window.addEventListener('keydown', judgeKeys);
     }
@@ -70,7 +70,10 @@ function makeWord() {
         }
 
     }
+    //debug
+    //word = "a";
     word = word.slice(0,400);
+    
     const box = document.getElementById('wordbox');
     box.value = word.slice(0,50);
     document.getElementById('allTypes').textContent = cnt * 2;
@@ -95,7 +98,7 @@ function stopInterval() {
 function judgeKeys(e) {
     e.preventDefault();
 
-    let c = char.textContent;
+    let ch = char.textContent;
     let n = num.textContent;
 
     if (isChrNum) {
@@ -104,7 +107,7 @@ function judgeKeys(e) {
             char.textContent = e.key;
             num.textContent = '';
         } else if (numbers.includes(e.key)) {
-            correctType(c, e.key);
+            correctType(ch, e.key);
             char.textContent = '';
             num.textContent = e.key;
         }
@@ -146,6 +149,7 @@ function correctType(ch, nu) {
 
 function finishType() {
     stopInterval();
+    removeJudgeKeysListener();
     makeTweet();
 }
 
@@ -175,4 +179,8 @@ function addHistory (tweet, tweetURL) {
 
     const info = document.getElementById('info');
     info.appendChild(newResult);
+}
+
+function removeJudgeKeysListener() {
+    window.removeEventListener('keydown', judgeKeys);
 }
