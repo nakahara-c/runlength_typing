@@ -2,6 +2,7 @@
   
 https://nkhr.web.fc2.com/typing/runlength.html
 
-# change test
+## Overview
   
-test phrase
+This is a typing game.  
+You type a given string of characters in run-length compressed form.
