@@ -15,6 +15,9 @@ let progress = document.getElementById('progress');
 let wordBox = document.getElementById('wordbox');
 let time = 0;
 
+let startTime;
+let intervalId;
+
 let isChrNum = true;
 
 const L = 400;
@@ -47,9 +50,14 @@ function startType(e) {
         time = 0;
 
         makeWord();
-        stopInterval();
+        
+        clearInterval(intervalId);
+
         removeJudgeKeysListener();
-        timerArray.push(setInterval(startTimer, 100));
+        
+        startTime = performance.now();
+        intervalId = setInterval(startTimer, 100);
+
         window.addEventListener('keydown', judgeKeys);
     }
 }
@@ -70,8 +78,7 @@ function makeWord() {
         }
 
     }
-    //debug
-    //word = "a";
+
     word = word.slice(0,400);
     
     const box = document.getElementById('wordbox');
@@ -82,16 +89,15 @@ function makeWord() {
 
 function startTimer () {
 
-    let nowTime = time;
-    nowTime = (nowTime + 0.1);
-    timer.textContent = nowTime.toFixed(1);
-    time = nowTime;
+    let elapsedTime = (performance.now() - startTime) / 1000;
+    timer.textContent = elapsedTime.toFixed(1);
+    time = elapsedTime.toFixed(1);
 
 }
 
-function stopInterval() {
-    if (timerArray.length > 0) {
-        clearInterval(timerArray.shift());
+function stressFunc() {
+    let st = Date.now();
+    while (Date.now() - st < 300) {
     }
 }
 
@@ -148,7 +154,7 @@ function correctType(ch, nu) {
 }
 
 function finishType() {
-    stopInterval();
+    clearInterval(intervalId);
     removeJudgeKeysListener();
     makeTweet();
 }
@@ -165,7 +171,7 @@ function makeTweet () {
 
     const hashTags = "ランレングス圧縮タイピング"
     const tweet = `${t}sec (${ct}/${a}keys) ${c}CPM,${k}KPM`;
-    const url = 'https://nkhr.web.fc2.com/typing/runlength.html';
+    const url = 'https://nkhr-c.com/runlengthtyping/index.html';
     const tweetText = `https://twitter.com/intent/tweet?ref_src=twsrc&text=${tweet}&hashtags=${hashTags}&url=${url}`;
     tweetButton.href = tweetText;
 
